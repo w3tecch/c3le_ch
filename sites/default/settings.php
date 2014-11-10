@@ -210,22 +210,22 @@
  *   );
  * @endcode
  */
-/*$databases = array (
+$databases = array (
   'default' => 
   array (
     'default' => 
     array (
-      'database' => 'c3le_ch',
+      'database' => 'drupal',
       'username' => 'root',
-      'password' => 'root',
-      'host' => '127.0.0.1',
+      'password' => 'awes0me!',
+      'host' => '173.194.243.30',
       'port' => '',
       'driver' => 'mysql',
       'prefix' => '',
     ),
   ),
-);*/
-  $databases['default']['default'] = array(
+);
+  /*$databases['default']['default'] = array(
     'database' => 'drupal',
     'username' => 'root',
     'password' => '',
@@ -233,11 +233,34 @@
     'port' => '',
     'driver' => 'mysql',
     'prefix' => '',
-  );
+  );*/
 
 $conf['google_appengine_default_storage_bucket'] = 'drupal-filesystem';
 $conf['google_appengine_default_storage_cname'] = FALSE;
 $conf['google_appengine_aggregate'] = 'proxy'; // (static|proxy|gcs)
+
+/**
+ * Base URL (optional).
+ *
+ * If Drupal is generating incorrect URLs on your site, which could
+ * be in HTML headers (links to CSS and JS files) or visible links on pages
+ * (such as in menus), uncomment the Base URL statement below (remove the
+ * leading hash sign) and fill in the absolute URL to your Drupal installation.
+ *
+ * You might also want to force users to use a given domain.
+ * See the .htaccess file for more information.
+ *
+ * Examples:
+ *   $base_url = 'http://www.example.com';
+ *   $base_url = 'http://www.example.com:8888';
+ *   $base_url = 'http://www.example.com/drupal';
+ *   $base_url = 'https://www.example.com:8888/drupal';
+ *
+ * It is not allowed to have a trailing slash; Drupal will add it
+ * for you.
+ */
+//$base_url = 'http://w3tec-drupal.appspot.com';  // NO trailing slash!
+$base_url = 'http://c3le.ch';  // NO trailing slash!
 
 /**
  * Access control for update.php script.
@@ -270,28 +293,6 @@ $update_free_access = FALSE;
  *
  */
 $drupal_hash_salt = 'LNJACG1j64vasRiMms3sbShX0BEiTy9GYSClI3IIE84';
-
-/**
- * Base URL (optional).
- *
- * If Drupal is generating incorrect URLs on your site, which could
- * be in HTML headers (links to CSS and JS files) or visible links on pages
- * (such as in menus), uncomment the Base URL statement below (remove the
- * leading hash sign) and fill in the absolute URL to your Drupal installation.
- *
- * You might also want to force users to use a given domain.
- * See the .htaccess file for more information.
- *
- * Examples:
- *   $base_url = 'http://www.example.com';
- *   $base_url = 'http://www.example.com:8888';
- *   $base_url = 'http://www.example.com/drupal';
- *   $base_url = 'https://www.example.com:8888/drupal';
- *
- * It is not allowed to have a trailing slash; Drupal will add it
- * for you.
- */
-$base_url = 'http://w3tec-drupal.appspot.com/';  // NO trailing slash!
 
 /**
  * PHP settings:
