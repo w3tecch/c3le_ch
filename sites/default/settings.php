@@ -210,7 +210,7 @@
  *   );
  * @endcode
  */
-$databases = array (
+/*$databases = array (
   'default' => 
   array (
     'default' => 
@@ -224,7 +224,16 @@ $databases = array (
       'prefix' => '',
     ),
   ),
-);
+);*/
+  $databases['default']['default'] = array(
+    'database' => 'drupal',
+    'username' => 'root',
+    'password' => '',
+    'unix_socket' => '/cloudsql/w3tec-drupal:drupal',
+    'port' => '',
+    'driver' => 'mysql',
+    'prefix' => '',
+  );
 
 /**
  * Access control for update.php script.
