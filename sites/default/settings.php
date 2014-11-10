@@ -210,7 +210,7 @@
  *   );
  * @endcode
  */
-$databases = array (
+/*$databases = array (
   'default' => 
   array (
     'default' => 
@@ -224,8 +224,8 @@ $databases = array (
       'prefix' => '',
     ),
   ),
-);
-  /*$databases['default']['default'] = array(
+);*/
+  $databases['default']['default'] = array(
     'database' => 'drupal',
     'username' => 'root',
     'password' => '',
@@ -233,7 +233,7 @@ $databases = array (
     'port' => '',
     'driver' => 'mysql',
     'prefix' => '',
-  );*/
+  );
 
 $conf['google_appengine_default_storage_bucket'] = 'drupal-filesystem';
 $conf['google_appengine_default_storage_cname'] = FALSE;
@@ -259,8 +259,8 @@ $conf['google_appengine_aggregate'] = 'proxy'; // (static|proxy|gcs)
  * It is not allowed to have a trailing slash; Drupal will add it
  * for you.
  */
-//$base_url = 'http://w3tec-drupal.appspot.com';  // NO trailing slash!
-$base_url = 'http://c3le.ch';  // NO trailing slash!
+$base_url = 'http://w3tec-drupal.appspot.com';  // NO trailing slash!
+//$base_url = 'http://c3le.ch';  // NO trailing slash!
 
 /**
  * Access control for update.php script.
