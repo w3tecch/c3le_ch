@@ -235,6 +235,10 @@
     'prefix' => '',
   );
 
+$conf['google_appengine_default_storage_bucket'] = 'drupal-filesystem';
+$conf['google_appengine_default_storage_cname'] = FALSE;
+$conf['google_appengine_aggregate'] = 'proxy'; // (static|proxy|gcs)
+
 /**
  * Access control for update.php script.
  *
