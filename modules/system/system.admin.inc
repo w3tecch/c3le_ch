@@ -640,13 +640,13 @@ function system_theme_settings_validate($form, &$form_state) {
 
   // If the user provided a path for a logo or favicon file, make sure a file
   // exists at that path.
-  if ($form_state['values']['logo_path']) {
+  if (!empty($form_state['values']['logo_path'])) {
     $path = _system_theme_settings_validate_path($form_state['values']['logo_path']);
     if (!$path) {
       form_set_error('logo_path', t('The custom logo path is invalid.'));
     }
   }
-  if ($form_state['values']['favicon_path']) {
+  if (!empty($form_state['values']['favicon_path'])) {
     $path = _system_theme_settings_validate_path($form_state['values']['favicon_path']);
     if (!$path) {
       form_set_error('favicon_path', t('The custom favicon path is invalid.'));
@@ -703,14 +703,16 @@ function system_theme_settings_submit($form, &$form_state) {
 
   // If the user uploaded a new logo or favicon, save it to a permanent location
   // and use it in place of the default theme-provided file.
-  if ($file = $values['logo_upload']) {
+  if (!empty($values['logo_upload'])) {
+    $file = $values['logo_upload'];
     unset($values['logo_upload']);
     $filename = file_unmanaged_copy($file->uri);
     $values['default_logo'] = 0;
     $values['logo_path'] = $filename;
     $values['toggle_logo'] = 1;
   }
-  if ($file = $values['favicon_upload']) {
+  if (!empty($values['favicon_upload'])) {
+    $file = $values['favicon_upload'];
     unset($values['favicon_upload']);
     $filename = file_unmanaged_copy($file->uri);
     $values['default_favicon'] = 0;
@@ -1803,7 +1805,6 @@ function system_file_system_settings() {
     '#maxlength' => 255,
     '#description' => t('A local file system path where public files will be stored. This directory must exist and be writable by Drupal. This directory must be relative to the Drupal installation directory and be accessible over the web.'),
     '#after_build' => array('system_check_directory'),
-    '#wrapper_scheme' => 'public',
   );
 
   $form['file_private_path'] = array(
@@ -1813,7 +1814,6 @@ function system_file_system_settings() {
     '#maxlength' => 255,
     '#description' => t('An existing local file system path for storing private files. It should be writable by Drupal and not accessible over the web. See the online handbook for <a href="@handbook">more information about securing private files</a>.', array('@handbook' => 'http://drupal.org/documentation/modules/file')),
     '#after_build' => array('system_check_directory'),
-    '#wrapper_scheme' => 'private',
   );
 
   $form['file_temporary_path'] = array(
@@ -1823,7 +1823,6 @@ function system_file_system_settings() {
     '#maxlength' => 255,
     '#description' => t('A local file system path where temporary files will be stored. This directory should not be accessible over the web.'),
     '#after_build' => array('system_check_directory'),
-    '#wrapper_scheme' => 'temporary',
   );
   // Any visible, writeable wrapper can potentially be used for the files
   // directory, including a remote file system that integrates with a CDN.
