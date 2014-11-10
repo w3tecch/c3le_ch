@@ -1630,7 +1630,18 @@ function file_save_upload($form_field_name, $validators = array(), $destination 
  * @ingroup php_wrappers
  */
 function drupal_move_uploaded_file($filename, $uri) {
-  $result = @move_uploaded_file($filename, $uri);
+  // move_uploaded_file() does not support moving a file between two different
+  // stream wrappers. Other file handling functions like rename() have the same
+  // problem, but copy() works since it explicitely sends the contents to the
+  // new source. As such move_uploaded_file() is replaced by is_uploaded_file(),
+  // copy(), and unlink() the old file.
+  //
+  // This is necessary since $filename will start with gs:// since the form
+  // will have been redirected through the GCS upload proxy. The destination
+  // $uri will contain something like public://, private://, etc which will end
+  // up translating to a gs:// location, but PHP is not aware of that.
+  $result = is_uploaded_file($filename) &&
+    copy($filename, $uri) && unlink($filename);
   // PHP's move_uploaded_file() does not properly support streams if safe_mode
   // or open_basedir are enabled so if the move failed, try finding a real path
   // and retry the move operation.
@@ -2162,15 +2173,10 @@ function file_upload_max_size() {
   static $max_size = -1;
 
   if ($max_size < 0) {
-    // Start with post_max_size.
-    $max_size = parse_size(ini_get('post_max_size'));
-
-    // If upload_max_size is less, then reduce. Except if upload_max_size is
-    // zero, which indicates no limit.
-    $upload_max = parse_size(ini_get('upload_max_filesize'));
-    if ($upload_max > 0 && $upload_max < $max_size) {
-      $max_size = $upload_max;
-    }
+    // Since uploads are proxied through GCS they are not limited by
+    // 'post_max_size'. As such, use the 'upload_max_filesize' ini setting which
+    // should provide the GCS limit instead of the normal core logic.
+    $max_size = parse_size(ini_get('upload_max_filesize'));
   }
   return $max_size;
 }
@@ -2475,22 +2481,15 @@ function drupal_rmdir($uri, $context = NULL) {
  * @ingroup php_wrappers
  */
 function drupal_tempnam($directory, $prefix) {
+  // TODO Revert once tempnam() is properly supported.
   $scheme = file_uri_scheme($directory);
-
-  if ($scheme && file_stream_wrapper_valid_scheme($scheme)) {
-    $wrapper = file_stream_wrapper_get_instance_by_scheme($scheme);
-
-    if ($filename = tempnam($wrapper->getDirectoryPath(), $prefix)) {
-      return $scheme . '://' . drupal_basename($filename);
-    }
-    else {
-      return FALSE;
-    }
+  if (!$scheme) {
+    $directory = 'temporary://' . $directory;
   }
-  else {
-    // Handle as a normal tempnam() call.
-    return tempnam($directory, $prefix);
-  }
+
+  $name = $directory . '/' . $prefix . mt_rand(100000, 10000000);
+  file_put_contents($name, '');
+  return $name;
 }
 
 /**
