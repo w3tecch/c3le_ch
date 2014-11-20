@@ -83,7 +83,7 @@
   <?php if ((!$page && !empty($title)) || !empty($title_prefix) || !empty($title_suffix) || $display_submitted): ?>
   <header class="panel-heading">
     <?php $node_type = array('simplenews' => t('News'), 'gallery' => t('Gallery')); ?>
-    <span class="pull-right label label-default"><?php print $node_type[$node->type]; ?></span>
+    <span class="pull-right label label-default"><?php if (!$page && !empty($title)){print $node_type[$node->type];} ?></span>
     <?php print render($title_prefix); ?>
     <?php if (!$page && !empty($title)): ?>
     <h2<?php print $title_attributes; ?> class="page-header"><a href="<?php print $node_url; ?>"><?php print $title; ?></a></h2>
