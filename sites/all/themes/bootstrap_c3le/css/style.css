@@ -7004,3 +7004,69 @@ table .checkbox input[type="checkbox"] {
   border-radius: 6px;
   margin-top: -30px;
 }
+@media (min-width: 1450px) {
+  .view-homage-teasers .media-list {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (min-width: 1450px) and (min-width: 992px) {
+  .view-homage-teasers .media-list {
+    float: left;
+    width: 66.66666667%;
+  }
+}
+@media (min-width: 1450px) and (min-width: 992px) {
+  .view-homage-teasers .media-list {
+    margin-left: 16.66666667%;
+  }
+}
+.view-homage-teasers .media {
+  margin-bottom: 40px;
+  padding-bottom: 10px;
+}
+.view-homage-teasers .media div:first-child {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+.view-homage-teasers .media img {
+  border-radius: 50%;
+}
+.view-homage-teasers .media:not(:last-child) {
+  border-bottom: 1px solid #eeeeee;
+}
+.view-homage-teasers .media-body .media-heading {
+  font-size: 30px;
+}
+.view-homage-teasers .media-body .media-heading span {
+  font-size: 18px;
+  margin-left: 10px;
+}
+#homepage-main .row:first-child {
+  margin-bottom: 40px;
+  margin-top: -25px;
+}
+#homepage-main .homepage-title {
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  margin-top: 10%;
+}
+#homepage-main .homepage-title .pane-content {
+  font-size: 36px;
+  color: #dd4814;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 15px;
+  max-width: 95%;
+  border-radius: 5px;
+}
+@media (min-width: 1200px) {
+  #homepage-main .homepage-title .pane-content {
+    max-width: 80%;
+  }
+}

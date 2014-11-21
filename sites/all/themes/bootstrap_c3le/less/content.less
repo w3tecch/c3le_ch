@@ -1,5 +1,6 @@
 // Insert your styling here.
 @import "../bootstrap/less/mixins.less";
+@import "../bootstrap/less/scaffolding.less";
 
 // Comments
 .comment-wrapper {
@@ -15,5 +16,72 @@
     .pull-right;
     .img-rounded;
     margin-top: -30px;
+  }
+}
+
+// homepage
+.view-homage-teasers {
+
+  @media (min-width: 1450px) {
+    .media-list {
+      .make-md-column(8);
+      .make-md-column-offset(2);
+    }
+  }
+
+  .media {
+    margin-bottom: 40px;
+    padding-bottom: 10px;
+
+    div:first-child {
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+
+    img {
+      .img-circle;
+    }
+  }
+  .media:not(:last-child) {
+    border-bottom: 1px solid @body-bg;
+  }
+
+  .media-body {
+    .media-heading {
+      font-size: 30px;
+      span {
+        font-size: 18px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+#homepage-main {
+  .row:first-child {
+    margin-bottom: 40px;
+    margin-top: -25px;
+  }
+
+  .homepage-title {
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    margin-top: 10%;
+
+    .pane-content {
+      font-size: @font-size-h1;
+      color: @brand-primary;
+      display: table;
+      margin-left: auto;
+      margin-right: auto;
+      background: rgba(255,255,255,0.9);
+      padding: 15px;
+      max-width: 95%;
+      @media (min-width: @screen-lg-min) {
+        max-width: 80%;
+      }
+      border-radius: 5px;
+    }
   }
 }
